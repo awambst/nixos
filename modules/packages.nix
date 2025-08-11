@@ -6,6 +6,9 @@
       "steam"
       "steam-unwrapped"
       "parsec-bin"
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
     ];
   environment.systemPackages = with pkgs; [
     #vesktop
