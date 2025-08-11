@@ -138,8 +138,9 @@ in
   hardware.graphics = {
     enable = true;
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
+  services.xserver.videoDrivers =
+    if info.nvidia-gpu then [ "nvidia" ] else [ "modesetting" ];
+  hardware.nvidia = lib.mkIf info.nvidia-gpu {
     modesetting.enable = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
@@ -150,7 +151,7 @@ in
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = false;
 
-    open = false;
+    open = info.nvidia-gpu-at-least-rtx2000;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };

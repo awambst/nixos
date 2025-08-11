@@ -1,4 +1,8 @@
 {
   # put your login here 
   # login = "example";
+  # wg-admin-homelab = false;
+  # vpn-admin-banquise = false;
+  # nvidia-gpu = false;
+  # nvidia-gpu-at-least-rtx2000 = false;
 }
