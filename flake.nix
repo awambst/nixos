@@ -25,9 +25,10 @@
     { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
+      info = import ./info.nix;
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."${info.hostname}" = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
           inherit inputs;
