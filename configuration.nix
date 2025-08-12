@@ -46,7 +46,7 @@ in
     extraLocaleSettings = {
       LC_MESSAGES = "en_US.UTF-8";
       LC_TIME = "fr_FR.UTF-8";
-      LANG = "en_US.UTF-8";
+      LANG = if info.lang == "fr" then "fr_FR.UTF-8" else"en_US.UTF-8";
       LC_CTYPE = "en_US.UTF-8";
       LC_NUMERIC = "en_US.UTF-8";
       LC_COLLATE = "en_US.UTF-8";

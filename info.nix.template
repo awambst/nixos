@@ -2,6 +2,7 @@
   # put your login here 
   # login = "example";
   # hostname = "nixos";
+  # lang =  "us" ou "fr";
   # wg-admin-homelab = false;
   # vpn-admin-banquise = false;
   # nvidia-gpu = false;
