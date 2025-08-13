@@ -50,5 +50,42 @@
 
     strongswan
     openssl
+
+    obsidian
+    kdePackages.kate
+    kdePackages.konsole
+
+    teams-for-linux
+
+    fzf
+
+    htop
+
+    filezilla
+
+    inkscape-with-extensions
+
+    gimp3-with-plugins
+
+    sl
+    fortune
+    cowsay 
+
+    vlc
+
+    audacity
+
+    hexedit
+
+    python314Full
+
+    onlyoffice-bin_latest
+    
+    shotcut
+
+    # 3d and 3d printing
+    blender
+    cura-appimage
+    freecad-qt6
   ];
 }

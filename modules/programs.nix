@@ -15,4 +15,6 @@
     xwayland.enable = true;
   };
   programs.hyprlock.enable = true;
+
+  programs.kdeconnect.enable = true;
 }
