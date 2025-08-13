@@ -5,10 +5,11 @@
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-unwrapped"
-      "parsec-bin"
+      "parsec-bin" # ;-;
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
+      "obsidian" # ;-;
     ];
   environment.systemPackages = with pkgs; [
     #vesktop
@@ -18,13 +19,16 @@
     r2modman
 
     libreoffice-qt6-still
+    onlyoffice-bin_latest
 
     cmst
     connman
 
+    # notifications
     mako
     libnotify
 
+    # confirm dialog
     zenity
 
     alacritty
@@ -52,6 +56,7 @@
     openssl
 
     obsidian
+    logseq
     kdePackages.kate
     kdePackages.konsole
 
@@ -79,8 +84,6 @@
 
     python314Full
 
-    onlyoffice-bin_latest
-    
     shotcut
 
     # 3d and 3d printing
