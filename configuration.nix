@@ -46,7 +46,7 @@ in
     extraLocaleSettings = {
       LC_MESSAGES = "en_US.UTF-8";
       LC_TIME = "fr_FR.UTF-8";
-      LANG = if info.lang == "fr" then "fr_FR.UTF-8" else"en_US.UTF-8";
+      LANG = if info.lang == "fr" then "fr_FR.UTF-8" else "en_US.UTF-8";
       LC_CTYPE = "en_US.UTF-8";
       LC_NUMERIC = "en_US.UTF-8";
       LC_COLLATE = "en_US.UTF-8";
@@ -112,7 +112,23 @@ in
     font-awesome
     powerline-fonts
     powerline-symbols
+    nerd-fonts._3270
+    nerd-fonts.code-new-roman
+    nerd-fonts.comic-shanns-mono
+    nerd-fonts.cousine
+    nerd-fonts.d2coding
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.monaspace
+    nerd-fonts.overpass
+    nerd-fonts.roboto-mono
     nerd-fonts.symbols-only
+    nerd-fonts.terminess-ttf
+    nerd-fonts.ubuntu
+    nerd-fonts.ubuntu-mono
+    nerd-fonts.ubuntu-sans
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
