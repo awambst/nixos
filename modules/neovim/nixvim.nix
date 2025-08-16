@@ -2,19 +2,18 @@
   globals.mapleader = " ";
 
   extraConfigLua = ''
-             -- Folding uniquement pour C/C++
-            vim.api.nvim_create_autocmd("FileType", {
-              pattern = { "c", "cpp", "h", "hpp", "java" },
-              callback = function()
-                vim.opt_local.foldmethod = "expr"
-                vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
-                vim.opt_local.foldenable = true
-                vim.opt_local.foldlevel = 99
-              end
-            })
+     -- Folding uniquement pour C/C++
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "c", "cpp", "h", "hpp", "java" },
+      callback = function()
+        vim.opt_local.foldmethod = "expr"
+        vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+        vim.opt_local.foldenable = true
+        vim.opt_local.foldlevel = 99
+      end
+    })
 
-             -- ouvre un term a droite
-    --local opts = { noremap = true, silent = true }
+    -- ouvre un term a droite
     vim.keymap.set('n', '<leader>t', function()
       vim.cmd('vsplit')
                vim.cmd('wincmd l')
@@ -26,108 +25,109 @@
      vim.keymap.set('t', '<Esc>', '<C-\\><C-n>:q<CR>', opts)
 
             -- Configuration des diagnostics avec hover automatique
-            vim.diagnostic.config({
-              virtual_text = {
-                prefix = '●',
-                source = "always",
-              },
-              float = {
-                source = "always",
-                border = "rounded",
-                header = "",
-                prefix = "",
-              },
-              signs = true,
-              underline = true,
-              update_in_insert = false,
-              severity_sort = true,
-            })
+    vim.diagnostic.config({
+      virtual_text = {
+        prefix = '●',
+        source = "always",
+      },
+      float = {
+        source = "always",
+        border = "rounded",
+        header = "",
+        prefix = "",
+      },
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+    })
 
-            -- Hover automatique sur diagnostic quand on met la souris dessus
-            vim.api.nvim_create_autocmd("CursorHold", {
-              callback = function()
-                local opts = {
-                  focusable = false,
-                  close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                  border = 'rounded',
-                  source = 'always',
-                  prefix = ' ',
-                }
-                vim.diagnostic.open_float(nil, opts)
-              end
-            })
+    -- Hover automatique sur diagnostic quand on met la souris dessus
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = function()
+        local opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+        }
+        vim.diagnostic.open_float(nil, opts)
+      end
+    })
 
-            -- Raccourcis sans leader
-            -- vim.keymap.set('n', '<F2>', ':echo "Test fonctionne!"<CR>', { desc = 'Test F2' })
-            vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle Neotree' })
-            vim.keymap.set('n', '<leader>z', ':Telescope find_files<CR>', { desc = 'Find files' })
-            vim.keymap.set('n', '<F5>', ':setlocal foldmethod=syntax<CR>', { desc = 'Enable syntax folding' })
-            vim.keymap.set('n', '<F6>', ':setlocal foldenable!<CR>', { desc = 'Toggle folding' })
+    -- Raccourcis sans leader
+    -- vim.keymap.set('n', '<F2>', ':echo "Test fonctionne!"<CR>', { desc = 'Test F2' })
+    vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle Neotree' })
+    vim.keymap.set('n', '<leader>z', ':Telescope find_files<CR>', { desc = 'Find files' })
+    vim.keymap.set('n', '<F5>', ':setlocal foldmethod=syntax<CR>', { desc = 'Enable syntax folding' })
+    vim.keymap.set('n', '<F6>', ':setlocal foldenable!<CR>', { desc = 'Toggle folding' })
 
-            -- Raccourcis pour diagnostics
-            vim.keymap.set('n', '<F7>', vim.diagnostic.open_float, { desc = 'Show diagnostic popup' })
-            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
-            vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
-             -- En mode Visual, Tab indente et garde la sélection
-        vim.keymap.set('v', '<Tab>', '>gv', { desc = 'Indent and keep selection' })
-        vim.keymap.set('v', '<S-Tab>', '<gv', { desc = 'Outdent and keep selection' })
+    -- Raccourcis pour diagnostics
+    vim.keymap.set('n', '<F7>', vim.diagnostic.open_float, { desc = 'Show diagnostic popup' })
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
 
-        -- Alternative avec > et < qui réindentent après sélection
-        vim.keymap.set('v', '>', '>gv', { desc = 'Indent and reselect' })
-        vim.keymap.set('v', '<', '<gv', { desc = 'Outdent and reselect' })
+     -- En mode Visual, Tab indente et garde la sélection
+    vim.keymap.set('v', '<Tab>', '>gv', { desc = 'Indent and keep selection' })
+    vim.keymap.set('v', '<S-Tab>', '<gv', { desc = 'Outdent and keep selection' })
 
-        -- Bonus : En mode Normal, indenter ligne courante
-        vim.keymap.set('n', '<Tab>', '>>', { desc = 'Indent current line' })
-        vim.keymap.set('n', '<S-Tab>', '<<', { desc = 'Outdent current line' })
+    -- Alternative avec > et < qui réindentent après sélection
+    vim.keymap.set('v', '>', '>gv', { desc = 'Indent and reselect' })
+    vim.keymap.set('v', '<', '<gv', { desc = 'Outdent and reselect' })
 
-             -- Configuration du terminal avec autocmd
-local terminal = vim.api.nvim_create_augroup("TerminalLocalOptions", { clear = true })
+    -- Bonus : En mode Normal, indenter ligne courante
+    vim.keymap.set('n', '<Tab>', '>>', { desc = 'Indent current line' })
+    vim.keymap.set('n', '<S-Tab>', '<<', { desc = 'Outdent current line' })
 
--- Configuration quand un terminal s'ouvre
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-  group = terminal,
-  pattern = { "*" },
-  callback = function(event)
-    -- Désactive les numéros de lignes et autres éléments UI dans le terminal
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.cursorline = false
-    vim.opt_local.signcolumn = "no"
-    vim.opt_local.statuscolumn = ""
-    
-    -- Code pour échapper du mode terminal
-    local code_term_esc = vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true)
-    
-    -- Navigation avec les flèches + leader depuis le terminal
-    vim.keymap.set("n", "<leader-Left>", "<C-\\><C-n><C-w>h", opts)
-    vim.keymap.set("n", "<leader-Down>", "<C-\\><C-n><C-w>j", opts)
-    vim.keymap.set("n", "<leader-Up>", "<C-\\><C-n><C-w>k", opts)
-    vim.keymap.set("n", "<leader-Right>", "<C-\\><C-n><C-w>l", opts)
-    vim.keymap.set("t", "<C-Left>", "<C-\\><C-n><C-w>h", opts)
-    vim.keymap.set("t", "<C-Down>", "<C-\\><C-n><C-w>j", opts)
-    vim.keymap.set("t", "<C-Up>", "<C-\\><C-n><C-w>k", opts)
-    vim.keymap.set("t", "<C-Right>", "<C-\\><C-n><C-w>l", opts)
+    -- Configuration du terminal avec autocmd
+    local terminal = vim.api.nvim_create_augroup("TerminalLocalOptions", { clear = true })
+
+    -- Configuration quand un terminal s'ouvre
+    vim.api.nvim_create_autocmd({ "TermOpen" }, {
+      group = terminal,
+      pattern = { "*" },
+      callback = function(event)
+        -- Désactive les numéros de lignes et autres éléments UI dans le terminal
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.cursorline = false
+        vim.opt_local.signcolumn = "no"
+        vim.opt_local.statuscolumn = ""
+        
+        -- Code pour échapper du mode terminal
+        local code_term_esc = vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true)
+        
+        -- Navigation avec les flèches + leader depuis le terminal
+        vim.keymap.set("n", "<leader-Left>", "<C-\\><C-n><C-w>h", opts)
+        vim.keymap.set("n", "<leader-Down>", "<C-\\><C-n><C-w>j", opts)
+        vim.keymap.set("n", "<leader-Up>", "<C-\\><C-n><C-w>k", opts)
+        vim.keymap.set("n", "<leader-Right>", "<C-\\><C-n><C-w>l", opts)
+        vim.keymap.set("t", "<C-Left>", "<C-\\><C-n><C-w>h", opts)
+        vim.keymap.set("t", "<C-Down>", "<C-\\><C-n><C-w>j", opts)
+        vim.keymap.set("t", "<C-Up>", "<C-\\><C-n><C-w>k", opts)
+        vim.keymap.set("t", "<C-Right>", "<C-\\><C-n><C-w>l", opts)
 
 
-    -- Définir le filetype si ce n'est pas fait
-    if vim.bo.filetype == "" then
-      vim.api.nvim_set_option_value("filetype", "terminal", { buf = event.buf })
-      
-    vim.cmd.startinsert()
-    end
-  end,
-})
+        -- Définir le filetype si ce n'est pas fait
+        if vim.bo.filetype == "" then
+          vim.api.nvim_set_option_value("filetype", "terminal", { buf = event.buf })
+          
+        vim.cmd.startinsert()
+        end
+      end,
+    })
 
--- Auto-enter en mode insert quand on entre dans une fenêtre terminal
-vim.api.nvim_create_autocmd({ "WinEnter" }, {
-  group = terminal,
-  pattern = { "*" },
-  callback = function()
-    if vim.bo.filetype == "terminal" then
-      vim.cmd.startinsert()
-    end
-  end,
-})
+    -- Auto-enter en mode insert quand on entre dans une fenêtre terminal
+    vim.api.nvim_create_autocmd({ "WinEnter" }, {
+      group = terminal,
+      pattern = { "*" },
+      callback = function()
+        if vim.bo.filetype == "terminal" then
+          vim.cmd.startinsert()
+        end
+      end,
+    })
 
     local nav_keys = {
       ["<C-Left>"] = "<C-h>",   -- Fenêtre gauche
@@ -140,7 +140,9 @@ vim.api.nvim_create_autocmd({ "WinEnter" }, {
   opts = {
     number = true;
     relativenumber = true;
-    smartindent = true;
+    smartindent = false;
+    cindent = false;
+    autoindent = true;
     wrap = false;
     swapfile = false;
     backup = false;
