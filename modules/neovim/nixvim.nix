@@ -21,8 +21,9 @@
       vim.cmd('startinsert')  -- Entre automatiquement en mode insert dans le terminal
     end, { desc = 'Open terminal in right split' })
 
-    -- ferme le terminal avec Esc
-     vim.keymap.set('t', '<Esc>', '<C-\\><C-n>:q<CR>', opts)
+    -- ferme le terminal avec Esc ou space t
+    vim.keymap.set('t', '<Esc>', '<C-\\><C-n>:q<CR>', opts)
+    vim.keymap.set('t', '<leader>t', '<C-\\><C-n>:q<CR>', opts)
 
             -- Configuration des diagnostics avec hover automatique
     vim.diagnostic.config({
@@ -79,6 +80,16 @@
     -- Bonus : En mode Normal, indenter ligne courante
     vim.keymap.set('n', '<Tab>', '>>', { desc = 'Indent current line' })
     vim.keymap.set('n', '<S-Tab>', '<<', { desc = 'Outdent current line' })
+    
+    vim.keymap.set("n", "<leader>h", "<C-\\><C-n><C-w>h", opts)
+    vim.keymap.set("n", "<leader>j", "<C-\\><C-n><C-w>j", opts)
+    vim.keymap.set("n", "<leader>k", "<C-\\><C-n><C-w>k", opts)
+    vim.keymap.set("n", "<leader>l", "<C-\\><C-n><C-w>l", opts)
+
+    vim.keymap.set({'n', 'i', 't'}, '<A-h>', '<C-Left>')
+    vim.keymap.set({'n', 'i', 't'}, '<A-j>', '<S-Up>')
+    vim.keymap.set({'n', 'i', 't'}, '<A-k>', '<S-Down>')
+    vim.keymap.set({'n', 'i', 't'}, '<A-l>', '<C-Right>')
 
     -- Configuration du terminal avec autocmd
     local terminal = vim.api.nvim_create_augroup("TerminalLocalOptions", { clear = true })
@@ -99,15 +110,10 @@
         local code_term_esc = vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true)
         
         -- Navigation avec les flèches + leader depuis le terminal
-        vim.keymap.set("n", "<leader-Left>", "<C-\\><C-n><C-w>h", opts)
-        vim.keymap.set("n", "<leader-Down>", "<C-\\><C-n><C-w>j", opts)
-        vim.keymap.set("n", "<leader-Up>", "<C-\\><C-n><C-w>k", opts)
-        vim.keymap.set("n", "<leader-Right>", "<C-\\><C-n><C-w>l", opts)
-        vim.keymap.set("t", "<C-Left>", "<C-\\><C-n><C-w>h", opts)
-        vim.keymap.set("t", "<C-Down>", "<C-\\><C-n><C-w>j", opts)
-        vim.keymap.set("t", "<C-Up>", "<C-\\><C-n><C-w>k", opts)
-        vim.keymap.set("t", "<C-Right>", "<C-\\><C-n><C-w>l", opts)
-
+       vim.keymap.set("t", "<leader>h", "<C-\\><C-n><C-w>h", opts)
+        vim.keymap.set("t", "<leader>j", "<C-\\><C-n><C-w>j", opts)
+        vim.keymap.set("t", "<leader>k", "<C-\\><C-n><C-w>k", opts)
+        vim.keymap.set("t", "<leader>l", "<C-\\><C-n><C-w>l", opts)
 
         -- Définir le filetype si ce n'est pas fait
         if vim.bo.filetype == "" then
@@ -129,12 +135,7 @@
       end,
     })
 
-    local nav_keys = {
-      ["<C-Left>"] = "<C-h>",   -- Fenêtre gauche
-      ["<C-Down>"] = "<C-j>",   -- Fenêtre bas
-      ["<C-Up>"] = "<C-k>",     -- Fenêtre haut  
-      ["<C-Right>"] = "<C-l>"   -- Fenêtre droite
-    }
+    
   '';
 
   opts = {
