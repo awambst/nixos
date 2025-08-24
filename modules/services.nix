@@ -46,5 +46,6 @@
   #USBs
   services.gvfs.enable = true;
   services.udisks2.enable = true;
-  services.tailscale.enable = true;
+
+  services.tailscale.enable = false;
 }
