@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.thunar.enable = true;
   # Enable to be able to save preferences
@@ -13,6 +13,7 @@
   programs.hyprland = {
 	  enable = true;
     xwayland.enable = true;
+    package = pkgs.hyprland;
   };
   programs.hyprlock.enable = true;
 

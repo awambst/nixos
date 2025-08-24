@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 {
   nixpkgs.config.allowUnfreePredicate =
     pkg:
@@ -90,5 +90,7 @@
     blender
     cura-appimage
     freecad-qt6
+
+    inputs.hyprXPrimary.packages.${system}.default
   ];
 }

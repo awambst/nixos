@@ -19,6 +19,15 @@
     #url = "github:nix-community/home-manager";
     #inputs.nixpkgs.follows = "nixpkgs";
     #};
+    hyprland = {
+      url = "github:hyprwm/hyprland";
+    };
+
+    hyprXPrimary = {
+      url = "github:zakk4223/hyprXPrimary";
+      inputs.hyprland.follows = "hyprland";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+    };
   };
 
   outputs =
@@ -37,7 +46,7 @@
         modules = [
           inputs.nixvim.nixosModules.nixvim
           inputs.flake-waybar.nixosModules.waybar
-          
+
           ./modules/firefox.nix
           ./modules/packages.nix
           ./modules/services.nix
