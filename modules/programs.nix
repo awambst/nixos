@@ -13,7 +13,6 @@
   programs.hyprland = {
 	  enable = true;
     xwayland.enable = true;
-    package = pkgs.hyprland;
   };
   programs.hyprlock.enable = true;
 

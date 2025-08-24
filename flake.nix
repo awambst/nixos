@@ -21,17 +21,27 @@
     #};
     hyprland = {
       url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    #hyprland-plugins = {
+    #  url = "github:hyprwm/hyprland-plugins";
+    #  inputs.hyprland.follows = "hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    hyprXPrimary = {
-      url = "github:zakk4223/hyprXPrimary";
-      inputs.hyprland.follows = "hyprland";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
-    };
+    #hyprXPrimary = {
+    #  url = "github:zakk4223/hyprXPrimary";
+    #  #inputs.hyprland.follows = "hyprland";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       info = import ./info.nix;
