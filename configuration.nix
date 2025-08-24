@@ -32,7 +32,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "${info.hostname}"; # Define your hostname.
 
   services.dnsmasq = {
     enable = true;
