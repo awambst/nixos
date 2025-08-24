@@ -104,7 +104,19 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi/";
             installation_mode = "force_installed";
           };
+          "ATBC@EasonWong" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/adaptive-tab-bar-colour/latest.xpi/";
+            installation_mode = "force_installed";
+          };
+          "@contain-facebook" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/facebook-container/latest.xpi/";
+            installation_mode = "force_installed";
+          };
 
+          "extension@one-tab.com" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/onetab/latest.xpi/";
+            installation_mode = "force_installed";
+          };
         };
 
         # ---- PREFERENCES ----
