@@ -100,6 +100,11 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi/";
             installation_mode = "force_installed";
           };
+          "gdpr@cavi.au.dk" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi/";
+            installation_mode = "force_installed";
+          };
+
         };
 
         # ---- PREFERENCES ----
