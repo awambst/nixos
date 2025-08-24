@@ -34,6 +34,15 @@ in
 
   networking.hostName = "nixos"; # Define your hostname.
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      conf-file = "/etc/nixos/assets/domains.txt";
+      bind-interfaces = false;
+      server = [ "9.9.9.9" ];
+    };
+  };
+
   virtualisation.docker.enable = true;
 
   # Set your time zone.
@@ -90,7 +99,7 @@ in
   };
 
   programs = {
-    firefox.enable = true;
+    #firefox.enable = true;
     thunderbird.enable = true;
     git.enable = true;
   };

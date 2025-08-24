@@ -3,6 +3,9 @@
   services.connman = {
     enable = true;
     wifi.backend = "iwd"; # Support WiFi
+    extraFlags = [
+      "--nodnsproxy"
+    ];
     extraConfig = ''
       [General]
       PreferredTechnologies = ethernet,wifi
@@ -43,4 +46,5 @@
   #USBs
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  services.tailscale.enable = true;
 }
