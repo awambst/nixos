@@ -32,7 +32,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "${info.hostname}"; # Define your hostname.
+  networking = {
+    hostName = "${info.hostname}"; # Define your hostname.
+    nameservers = [ "127.0.0.1" ];
+  };
 
   services.dnsmasq = {
     enable = true;
