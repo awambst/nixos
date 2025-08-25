@@ -90,5 +90,7 @@
     blender
     cura-appimage
     freecad-qt6
+
+    playerctl
   ];
 }
