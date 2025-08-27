@@ -92,5 +92,7 @@
     freecad-qt6
 
     playerctl
+
+    logiops
   ];
 }
