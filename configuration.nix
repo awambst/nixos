@@ -81,7 +81,20 @@ in
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+
+    displayManager.lightdm = {
+      enable = true;
+      greeters.pantheon = {
+        enable = true;
+      };
+    };
+
+    windowManager.i3.enable = true;
+  };
+
+  programs.hyprland.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -119,6 +132,7 @@ in
     traceroute
     parsec-bin # temp, to remove asap
     openh264
+    betterlockscreen
   ];
 
   fonts.packages = with pkgs; [
