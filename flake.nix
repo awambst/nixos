@@ -57,7 +57,7 @@
           inputs.nixvim.nixosModules.nixvim
           inputs.flake-waybar.nixosModules.waybar
 
-          ./modules/firefox.nix
+          #./modules/firefox.nix
           ./modules/packages.nix
           ./modules/services.nix
           ./modules/programs.nix
