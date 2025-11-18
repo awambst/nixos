@@ -103,6 +103,7 @@ in
       tapping = true; # tap-to-click
       naturalScrolling = true; # optional, scrolling direction
       disableWhileTyping = true; # optional but recommended
+      scrollMethod = "twofinger";
     };
   };
 
