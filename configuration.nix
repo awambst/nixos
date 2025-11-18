@@ -83,6 +83,7 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+    exportConfiguration = true;
 
     displayManager.lightdm = {
       enable = true;
