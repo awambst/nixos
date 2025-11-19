@@ -142,6 +142,7 @@ in
     parsec-bin # temp, to remove asap
     openh264
     betterlockscreen
+    i3blocks
   ];
 
   fonts.packages = with pkgs; [
