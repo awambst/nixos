@@ -15,6 +15,7 @@
     xwayland.enable = true;
   };
   programs.hyprlock.enable = true;
+  programs.i3lock.enable = true;
 
   programs.kdeconnect.enable = true;
 }
