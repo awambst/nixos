@@ -37,10 +37,10 @@
   services.pulseaudio.support32Bit = true;
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
+    #alsa.enable = true;
     pulse.enable = true;
-    wireplumber.enable = true;
-    alsa.support32Bit = true;
+    #wireplumber.enable = true;
+    #alsa.support32Bit = true;
   };
 
   #USBs
