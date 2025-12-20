@@ -14,8 +14,7 @@ in
 {
 
   services.thermald.enable = true;
-  xdg.mime.defaultApplications."inode/directory" = "thunar.desktop";
-
+  
   #nix.settings = {
   #substituters = [ "https://hyprland.cachix.org" ];
   #trusted-substituters = [ "https://hyprland.cachix.org" ];
