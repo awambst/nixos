@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  programs.thunar.enable = true;
-  # Enable to be able to save preferences
-  programs.xfconf.enable = true;
-
   programs.steam.enable = true;
 
   programs.light.enable = true;
