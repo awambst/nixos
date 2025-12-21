@@ -14,7 +14,7 @@ in
 {
 
   services.thermald.enable = true;
-  
+
   #nix.settings = {
   #substituters = [ "https://hyprland.cachix.org" ];
   #trusted-substituters = [ "https://hyprland.cachix.org" ];
@@ -43,6 +43,13 @@ in
       bind-interfaces = false;
       server = [ "9.9.9.9" ];
     };
+  };
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
   };
 
   virtualisation.docker.enable = true;
