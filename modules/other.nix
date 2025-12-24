@@ -37,7 +37,7 @@
     };
   };
 
-  networking.networkmanager.enable = false;
+  networking.networkmanager.enable = true;
 
   users.groups.video = { };
 

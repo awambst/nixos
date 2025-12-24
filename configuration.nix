@@ -14,7 +14,7 @@ in
 {
 
   services.thermald.enable = true;
-  
+
   #nix.settings = {
   #substituters = [ "https://hyprland.cachix.org" ];
   #trusted-substituters = [ "https://hyprland.cachix.org" ];
@@ -34,6 +34,10 @@ in
   networking = {
     hostName = "${info.hostname}"; # Define your hostname.
     nameservers = [ "127.0.0.1" ];
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
   };
 
   services.dnsmasq = {
@@ -116,6 +120,7 @@ in
       "audio"
       "pipewire"
       "netdev"
+      "networkmanager"
     ];
     packages = with pkgs; [
       tree
@@ -138,10 +143,10 @@ in
     vim
     wget
     traceroute
-    parsec-bin # temp, to remove asap
     openh264
     betterlockscreen
     i3blocks
+    networkmanagerapplet
   ];
 
   fonts.packages = with pkgs; [

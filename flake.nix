@@ -62,8 +62,9 @@
           ./modules/services.nix
           ./modules/programs.nix
           ./modules/other.nix
-          ./modules/neovim
+          #./modules/neovim
           ./modules/swww
+          ./modules/steam.nix
 
           ./configuration.nix
         ];

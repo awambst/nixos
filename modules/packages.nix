@@ -13,16 +13,11 @@
     ];
   environment.systemPackages = with pkgs; [
     #vesktop
-    arrpc # To be able to use discord acivity detection
-    vesktop
 
     r2modman
 
     libreoffice-qt6-still
     onlyoffice-bin_latest
-
-    cmst
-    connman
 
     # notifications
     mako
@@ -33,14 +28,7 @@
 
     alacritty
 
-    rustc
-    rustup
-    gcc
-
-    hyprshot
     hypridle
-
-    wofi
 
     pavucontrol
 
@@ -57,10 +45,6 @@
 
     obsidian
     logseq
-    kdePackages.kate
-    kdePackages.konsole
-
-    teams-for-linux
 
     fzf
 
@@ -68,19 +52,13 @@
 
     filezilla
 
-    inkscape-with-extensions
-
     gimp3-with-plugins
 
     sl
     fortune
     cowsay 
 
-    vlc
-
     audacity
-
-    hexedit
 
     python314Full
 

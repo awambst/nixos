@@ -1,17 +1,18 @@
 { pkgs, ... }:
 {
-  services.connman = {
-    enable = true;
-    wifi.backend = "iwd"; # Support WiFi
-    extraFlags = [
-      "--nodnsproxy"
-    ];
-    extraConfig = ''
-      [General]
-      PreferredTechnologies = ethernet,wifi
-      SingleConnectedTechnology = false
-    '';
-  };
+  #  services.connman = {
+    #    enable = true;
+    #    wifi.backend = "iwd"; # Support WiFi
+    #    extraFlags = [
+      #"--nodnsproxy"
+      #];
+    #  extraConfig = ''
+  #    [General]
+  #    PreferredTechnologies = ethernet,wifi
+  #    SingleConnectedTechnology = false
+  #  '';
+    #};
+
   services.udev.packages = [ pkgs.light ];
 
   services.actkbd = {

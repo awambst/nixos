@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  programs.steam.enable = true;
-
   programs.light.enable = true;
   programs.light.brightnessKeys.enable = true;
   programs.light.brightnessKeys.step = 10;
