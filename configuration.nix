@@ -49,6 +49,13 @@ in
     };
   };
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
   virtualisation.docker.enable = true;
 
   # Set your time zone.
