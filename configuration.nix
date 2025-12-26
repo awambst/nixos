@@ -104,6 +104,7 @@ in
 
     windowManager.i3.enable = true;
     desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = false;
   };
 
   programs.hyprland.enable = true;
