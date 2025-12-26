@@ -103,6 +103,7 @@ in
     };
 
     windowManager.i3.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   programs.hyprland.enable = true;
