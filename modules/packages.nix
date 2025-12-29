@@ -17,7 +17,7 @@
     r2modman
 
     libreoffice-qt6-still
-    onlyoffice-bin_latest
+    onlyoffice-desktopeditors
 
     # notifications
     mako
@@ -59,8 +59,6 @@
     cowsay 
 
     audacity
-
-    python314Full
 
     shotcut
 

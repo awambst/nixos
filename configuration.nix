@@ -97,15 +97,20 @@ in
 
     displayManager.lightdm = {
       enable = true;
-      greeters.pantheon = {
+      greeters.slick = {
         enable = true;
       };
     };
 
     windowManager.i3.enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = false;
   };
+
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = false;
+  services.gnome.core-apps.enable = false;
+  services.gnome.core-developer-tools.enable = false;
+  services.gnome.games.enable = false;
+  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
 
   programs.hyprland.enable = true;
 
@@ -159,7 +164,7 @@ in
   ];
 
   fonts.packages = with pkgs; [
-    font-awesome
+    font-awesome_7
     powerline-fonts
     powerline-symbols
     nerd-fonts._3270

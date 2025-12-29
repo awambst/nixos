@@ -1,6 +1,6 @@
-{ inputs, system, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = [ 
-    inputs.swww.packages.${system}.swww 
+    pkgs.swww 
   ];
 }
