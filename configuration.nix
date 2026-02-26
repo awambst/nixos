@@ -6,6 +6,7 @@
   lib,
   pkgs,
   inputs,
+  pkgsUnstable,
   ...
 }:
 let
@@ -31,23 +32,12 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking = {
-    hostName = "${info.hostname}"; # Define your hostname.
-    nameservers = [ "127.0.0.1" ];
-    networkmanager = {
-      enable = true;
-      wifi.backend = "iwd";
-    };
+  _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
   };
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      conf-file = "/etc/nixos/assets/domains.txt";
-      bind-interfaces = false;
-      server = [ "9.9.9.9" ];
-    };
-  };
+  boot.kernelPackages = pkgsUnstable.linuxPackages_6_19;
 
   services.sunshine = {
     enable = true;
@@ -94,35 +84,28 @@ in
   services.xserver = {
     enable = true;
     exportConfiguration = true;
-
-    displayManager.lightdm = {
-      enable = true;
-      greeters.slick = {
-        enable = true;
-      };
+    windowManager = {
+      i3.enable = true;
+      awesome.enable = true;
     };
-
-    windowManager.i3.enable = true;
   };
 
-  services.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.enable = false;
-  services.gnome.core-apps.enable = false;
-  services.gnome.core-developer-tools.enable = false;
-  services.gnome.games.enable = false;
-  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
+  programs = {
+    hyprland.enable = true;
+    sway.enable = true;
+  };
 
-  programs.hyprland.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput = {
+  services.displayManager.sddm = {
     enable = true;
-    touchpad = {
-      tapping = true; # tap-to-click
-      naturalScrolling = true; # optional, scrolling direction
-      disableWhileTyping = true; # optional but recommended
-      scrollMethod = "twofinger";
-    };
+    package = pkgsUnstable.kdePackages.sddm;
+    extraPackages = with pkgsUnstable; [
+      kdePackages.breeze-icons
+      kdePackages.kirigami
+      kdePackages.libplasma
+      kdePackages.qtsvg
+      kdePackages.qtmultimedia
+    ];
+    theme = "sddm-astronaut-theme";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -142,7 +125,6 @@ in
   };
 
   programs = {
-    #firefox.enable = true;
     thunderbird.enable = true;
     git.enable = true;
   };
@@ -155,35 +137,12 @@ in
 
   environment.systemPackages = with pkgs; [
     vim
-    wget
-    traceroute
     openh264
     betterlockscreen
     i3blocks
-    networkmanagerapplet
-  ];
+    sddm-astronaut
 
-  fonts.packages = with pkgs; [
-    font-awesome_7
-    powerline-fonts
-    powerline-symbols
-    nerd-fonts._3270
-    nerd-fonts.code-new-roman
-    nerd-fonts.comic-shanns-mono
-    nerd-fonts.cousine
-    nerd-fonts.d2coding
-    nerd-fonts.fira-code
-    nerd-fonts.fira-mono
-    nerd-fonts.hack
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.monaspace
-    nerd-fonts.overpass
-    nerd-fonts.roboto-mono
-    nerd-fonts.symbols-only
-    nerd-fonts.terminess-ttf
-    nerd-fonts.ubuntu
-    nerd-fonts.ubuntu-mono
-    nerd-fonts.ubuntu-sans
+    kdePackages.kwin
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
@@ -204,26 +163,4 @@ in
   # and migrated your data accordingly.
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
-  services.xserver.videoDrivers =
-    if info.nvidia-gpu then [ "nvidia" ] else [ "modesetting" ];
-  hardware.nvidia = lib.mkIf info.nvidia-gpu {
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep.
-    powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    open = info.nvidia-gpu-at-least-rtx2000;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 }

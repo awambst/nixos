@@ -18,29 +18,5 @@
     };
   };
 
-  networking.wireless.iwd = {
-    enable = true;
-    settings = {
-      IPv4 = {
-        Dhcp = "yes";
-        SendHostname = true;
-      };
-      IPv6 = {
-        Enable = false;
-      };
-      Settings = {
-        AutoConnect = true;
-      };
-      General = {
-        EnableNetworkConfiguration = true;
-      };
-    };
-  };
-
-  networking.networkmanager.enable = true;
-
   users.groups.video = { };
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
 }

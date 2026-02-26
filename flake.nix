@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     #    flake-waybar = {
     #      url = "git+https://gitea.napo280.fr/napo280/overlay-waybar";
     #      inputs.nixpkgs.follows = "nixpkgs";
@@ -12,8 +13,8 @@
       #inputs.nixpkgs.follows = "nixpkgs";
     };
     #    swww = {
-      #      url = "github:LGFae/swww"; # /v0.10.3";
-      #inputs.nixpkgs.follows = "nixpkgs";
+    #      url = "github:LGFae/swww"; # /v0.10.3";
+    #inputs.nixpkgs.follows = "nixpkgs";
     #    };
     #home-manager = {
     #url = "github:nix-community/home-manager";
@@ -40,6 +41,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       ...
     }@inputs:
     let
@@ -52,16 +54,22 @@
         specialArgs = {
           inherit inputs;
           inherit system;
+          inherit info;
         };
+
         modules = [
           inputs.nixvim.nixosModules.nixvim
 
-          #./modules/firefox.nix
           ./modules/packages.nix
           ./modules/services.nix
           ./modules/programs.nix
           ./modules/other.nix
-          #./modules/neovim
+
+          ./modules/net.nix
+          ./modules/fonts.nix
+          ./modules/nvidia.nix
+          ./modules/libinput.nix
+
           ./modules/swww
           ./modules/steam.nix
 
