@@ -40,7 +40,7 @@ in
   boot.kernelPackages = pkgsUnstable.linuxPackages_6_19;
 
   services.sunshine = {
-    enable = true;
+    enable = false;
     autoStart = true;
     capSysAdmin = true;
     openFirewall = true;
@@ -95,9 +95,15 @@ in
     sway.enable = true;
   };
 
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.plasma-login-manager = {
+    enable = false;
+    #    package = pkgsUnstable.kdePackages.plasma-login-manager;
+  };
+
   services.displayManager.sddm = {
     enable = true;
-    package = pkgsUnstable.kdePackages.sddm;
+    #package = pkgsUnstable.kdePackages.sddm;
     extraPackages = with pkgsUnstable; [
       kdePackages.breeze-icons
       kdePackages.kirigami
@@ -141,8 +147,6 @@ in
     betterlockscreen
     i3blocks
     sddm-astronaut
-
-    kdePackages.kwin
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system

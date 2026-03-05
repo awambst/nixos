@@ -1,4 +1,9 @@
-{ pkgs, lib, inputs, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   nixpkgs.config.allowUnfreePredicate =
     pkg:
@@ -56,16 +61,16 @@
 
     sl
     fortune
-    cowsay 
+    cowsay
 
     audacity
 
     shotcut
 
     # 3d and 3d printing
-    blender
-    cura-appimage
-    freecad-qt6
+    #blender
+    #cura-appimage
+    #freecad-qt6
 
     playerctl
 
