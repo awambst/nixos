@@ -24,6 +24,7 @@ in
   #nix.settings.substituters = [ "https://cache.nixos.org/" ];
 
   imports = [
+    ./modules/steam.nix
     ./hardware-configuration.nix
     (import ./modules/strongswan.nix { inherit info; })
     (import ./modules/wg.nix { inherit info; })

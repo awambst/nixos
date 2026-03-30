@@ -53,7 +53,6 @@
           ./modules/libinput.nix
 
           ./modules/swww
-          ./modules/steam.nix
 
           ./configuration.nix
         ];
