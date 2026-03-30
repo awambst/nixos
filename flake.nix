@@ -51,6 +51,7 @@
           ./modules/fonts.nix
           ./modules/nvidia.nix
           ./modules/libinput.nix
+          ./modules/discord.nix
 
           ./modules/swww
 
