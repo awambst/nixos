@@ -125,6 +125,7 @@ in
       "pipewire"
       "netdev"
       "networkmanager"
+      "docker"
     ];
     packages = with pkgs; [
       tree

@@ -3,6 +3,7 @@
   networking = {
     hostName = "${info.hostname}"; # Define your hostname.
     nameservers = [ "127.0.0.1" ];
+    extraHosts = "192.168.1.1 meteor.arcadyan.com";
     networkmanager = {
       enable = true;
       wifi.backend = "iwd";
