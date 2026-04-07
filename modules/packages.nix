@@ -10,7 +10,6 @@
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-unwrapped"
-      "parsec-bin" # ;-;
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
@@ -32,8 +31,6 @@
     zenity
 
     alacritty
-
-    hypridle
 
     pavucontrol
 
