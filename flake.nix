@@ -4,18 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixvim = {
-      url = "git+https://github.com/nix-community/nixvim.git"; # ?rev=ab1b5962e1ca90b42de47e1172e0d24ca80e6256";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    };
-    #home-manager = {
-    #url = "github:nix-community/home-manager";
-    #inputs.nixpkgs.follows = "nixpkgs";
-    #};
-    hyprland = {
-      url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -51,9 +39,9 @@
           ./modules/fonts.nix
           ./modules/nvidia.nix
           ./modules/libinput.nix
-          ./modules/discord.nix
+          #./modules/discord.nix
 
-          ./modules/swww
+          #./modules/swww
 
           ./configuration.nix
         ];

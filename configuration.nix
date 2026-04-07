@@ -149,6 +149,7 @@ in
     betterlockscreen
     i3blocks
     sddm-astronaut
+    vesktop
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
