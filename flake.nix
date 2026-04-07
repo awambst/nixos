@@ -28,8 +28,6 @@
         };
 
         modules = [
-          inputs.nixvim.nixosModules.nixvim
-
           ./modules/packages.nix
           ./modules/services.nix
           ./modules/programs.nix
