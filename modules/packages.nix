@@ -14,8 +14,10 @@
       "nvidia-settings"
       "nvidia-persistenced"
       "obsidian" # ;-;
+      "teamspeak6-client"
     ];
   environment.systemPackages = with pkgs; [
+    teamspeak6-client
     #vesktop
 
     r2modman
@@ -35,8 +37,6 @@
     pavucontrol
 
     prismlauncher # Minecraft launcher
-
-    light
 
     octaveFull
 

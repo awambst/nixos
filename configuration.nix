@@ -98,12 +98,12 @@ in
 
   services.desktopManager.plasma6.enable = true;
   services.displayManager.plasma-login-manager = {
-    enable = false;
-    #    package = pkgsUnstable.kdePackages.plasma-login-manager;
+    enable = true;
+    package = pkgsUnstable.kdePackages.plasma-login-manager;
   };
 
   services.displayManager.sddm = {
-    enable = true;
+    enable = false;
     #package = pkgsUnstable.kdePackages.sddm;
     extraPackages = with pkgsUnstable; [
       kdePackages.breeze-icons

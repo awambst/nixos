@@ -2,12 +2,19 @@
   info,
   config,
   lib,
+  pkgs,
   ...
 }:
 {
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      vulkan-loader
+      vulkan-validation-layers
+      intel-media-driver
+    ];
   };
   services.xserver.videoDrivers =
     if info.nvidia-gpu then [ "nvidia" ] else [ "modesetting" ];
