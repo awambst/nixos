@@ -102,19 +102,6 @@ in
     package = pkgsUnstable.kdePackages.plasma-login-manager;
   };
 
-  services.displayManager.sddm = {
-    enable = false;
-    #package = pkgsUnstable.kdePackages.sddm;
-    extraPackages = with pkgsUnstable; [
-      kdePackages.breeze-icons
-      kdePackages.kirigami
-      kdePackages.libplasma
-      kdePackages.qtsvg
-      kdePackages.qtmultimedia
-    ];
-    theme = "sddm-astronaut-theme";
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${info.login}" = {
     isNormalUser = true;
