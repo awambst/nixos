@@ -6,6 +6,7 @@
   lib,
   pkgs,
   inputs,
+  pkgsUnstable,
   ...
 }:
 let
@@ -14,7 +15,6 @@ in
 {
 
   services.thermald.enable = true;
-  xdg.mime.defaultApplications."inode/directory" = "thunar.desktop";
 
   #nix.settings = {
   #substituters = [ "https://hyprland.cachix.org" ];
@@ -24,6 +24,7 @@ in
   #nix.settings.substituters = [ "https://cache.nixos.org/" ];
 
   imports = [
+    ./modules/steam.nix
     ./hardware-configuration.nix
     (import ./modules/strongswan.nix { inherit info; })
     (import ./modules/wg.nix { inherit info; })
@@ -32,18 +33,18 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking = {
-    hostName = "${info.hostname}"; # Define your hostname.
-    nameservers = [ "127.0.0.1" ];
+  _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
   };
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      conf-file = "/etc/nixos/assets/domains.txt";
-      bind-interfaces = false;
-      server = [ "9.9.9.9" ];
-    };
+  boot.kernelPackages = pkgsUnstable.linuxPackages_6_19;
+
+  services.sunshine = {
+    enable = false;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
   };
 
   virtualisation.docker.enable = true;
@@ -84,28 +85,34 @@ in
   services.xserver = {
     enable = true;
     exportConfiguration = true;
-
-    displayManager.lightdm = {
-      enable = true;
-      greeters.pantheon = {
-        enable = true;
-      };
+    windowManager = {
+      i3.enable = true;
+      awesome.enable = true;
     };
-
-    windowManager.i3.enable = true;
   };
 
-  programs.hyprland.enable = true;
+  programs = {
+    hyprland.enable = true;
+    sway.enable = true;
+  };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput = {
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.plasma-login-manager = {
     enable = true;
-    touchpad = {
-      tapping = true; # tap-to-click
-      naturalScrolling = true; # optional, scrolling direction
-      disableWhileTyping = true; # optional but recommended
-      scrollMethod = "twofinger";
-    };
+    package = pkgsUnstable.kdePackages.plasma-login-manager;
+  };
+
+  services.displayManager.sddm = {
+    enable = false;
+    #package = pkgsUnstable.kdePackages.sddm;
+    extraPackages = with pkgsUnstable; [
+      kdePackages.breeze-icons
+      kdePackages.kirigami
+      kdePackages.libplasma
+      kdePackages.qtsvg
+      kdePackages.qtmultimedia
+    ];
+    theme = "sddm-astronaut-theme";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -117,6 +124,8 @@ in
       "audio"
       "pipewire"
       "netdev"
+      "networkmanager"
+      "docker"
     ];
     packages = with pkgs; [
       tree
@@ -124,7 +133,6 @@ in
   };
 
   programs = {
-    #firefox.enable = true;
     thunderbird.enable = true;
     git.enable = true;
   };
@@ -137,34 +145,11 @@ in
 
   environment.systemPackages = with pkgs; [
     vim
-    wget
-    traceroute
-    parsec-bin # temp, to remove asap
     openh264
     betterlockscreen
-  ];
-
-  fonts.packages = with pkgs; [
-    font-awesome
-    powerline-fonts
-    powerline-symbols
-    nerd-fonts._3270
-    nerd-fonts.code-new-roman
-    nerd-fonts.comic-shanns-mono
-    nerd-fonts.cousine
-    nerd-fonts.d2coding
-    nerd-fonts.fira-code
-    nerd-fonts.fira-mono
-    nerd-fonts.hack
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.monaspace
-    nerd-fonts.overpass
-    nerd-fonts.roboto-mono
-    nerd-fonts.symbols-only
-    nerd-fonts.terminess-ttf
-    nerd-fonts.ubuntu
-    nerd-fonts.ubuntu-mono
-    nerd-fonts.ubuntu-sans
+    i3blocks
+    sddm-astronaut
+    vesktop
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
@@ -185,26 +170,4 @@ in
   # and migrated your data accordingly.
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
-  services.xserver.videoDrivers =
-    if info.nvidia-gpu then [ "nvidia" ] else [ "modesetting" ];
-  hardware.nvidia = lib.mkIf info.nvidia-gpu {
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep.
-    powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    open = info.nvidia-gpu-at-least-rtx2000;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 }

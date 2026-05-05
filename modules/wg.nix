@@ -1,7 +1,7 @@
 { info }:
 { ... }:
 {
-networking.wireguard.enable = info.wg-admin-homelab;
+  networking.wireguard.enable = info.wg-admin-homelab;
   networking.wireguard.interfaces = {
     homelab = {
       ips = [ "10.100.0.2/24" ];
@@ -20,4 +20,4 @@ networking.wireguard.enable = info.wg-admin-homelab;
     };
 
   };
-  }
+}

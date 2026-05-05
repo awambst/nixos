@@ -2,44 +2,15 @@
   description = "My NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/25.05";
-    flake-waybar = {
-      url = "git+https://gitea.napo280.fr/napo280/overlay-waybar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixvim = {
-      url = "git+https://github.com/nix-community/nixvim.git"; # ?rev=ab1b5962e1ca90b42de47e1172e0d24ca80e6256";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    };
-    swww = {
-      url = "github:LGFae/swww"; # /v0.10.3";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    };
-    #home-manager = {
-    #url = "github:nix-community/home-manager";
-    #inputs.nixpkgs.follows = "nixpkgs";
-    #};
-    hyprland = {
-      url = "github:hyprwm/hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    #hyprland-plugins = {
-    #  url = "github:hyprwm/hyprland-plugins";
-    #  inputs.hyprland.follows = "hyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    #hyprXPrimary = {
-    #  url = "github:zakk4223/hyprXPrimary";
-    #  #inputs.hyprland.follows = "hyprland";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       ...
     }@inputs:
     let
@@ -52,18 +23,23 @@
         specialArgs = {
           inherit inputs;
           inherit system;
+          inherit info;
+          inherit nixpkgs-unstable;
         };
-        modules = [
-          inputs.nixvim.nixosModules.nixvim
-          inputs.flake-waybar.nixosModules.waybar
 
-          #./modules/firefox.nix
+        modules = [
           ./modules/packages.nix
           ./modules/services.nix
           ./modules/programs.nix
           ./modules/other.nix
-          ./modules/neovim
-          ./modules/swww
+
+          ./modules/net.nix
+          ./modules/fonts.nix
+          ./modules/nvidia.nix
+          ./modules/libinput.nix
+          #./modules/discord.nix
+
+          #./modules/swww
 
           ./configuration.nix
         ];
