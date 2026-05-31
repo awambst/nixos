@@ -17,7 +17,7 @@
       "teamspeak6-client"
     ];
   environment.systemPackages = with pkgs; [
-    teamspeak6-client
+    #teamspeak6-client
     #vesktop
 
     r2modman
@@ -45,8 +45,8 @@
     strongswan
     openssl
 
-    obsidian
-    logseq
+    #obsidian
+    #logseq
 
     fzf
 

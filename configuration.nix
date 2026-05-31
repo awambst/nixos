@@ -16,13 +16,6 @@ in
 
   services.thermald.enable = true;
 
-  #nix.settings = {
-  #substituters = [ "https://hyprland.cachix.org" ];
-  #trusted-substituters = [ "https://hyprland.cachix.org" ];
-  #trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-  #};
-  #nix.settings.substituters = [ "https://cache.nixos.org/" ];
-
   imports = [
     ./modules/steam.nix
     ./hardware-configuration.nix
@@ -38,7 +31,7 @@ in
     inherit (config.nixpkgs) config;
   };
 
-  boot.kernelPackages = pkgsUnstable.linuxPackages_6_19;
+  boot.kernelPackages = pkgsUnstable.linuxPackages_7_0;
 
   services.sunshine = {
     enable = false;
@@ -51,6 +44,7 @@ in
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -87,19 +81,40 @@ in
     exportConfiguration = true;
     windowManager = {
       i3.enable = true;
-      awesome.enable = true;
     };
   };
 
+  fonts.packages = with pkgs; [
+    font-awesome_7
+    powerline-fonts
+    powerline-symbols
+    nerd-fonts._3270
+    nerd-fonts.code-new-roman
+    nerd-fonts.comic-shanns-mono
+    nerd-fonts.cousine
+    nerd-fonts.d2coding
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.monaspace
+    nerd-fonts.overpass
+    nerd-fonts.roboto-mono
+    nerd-fonts.symbols-only
+    nerd-fonts.terminess-ttf
+    nerd-fonts.ubuntu
+    nerd-fonts.ubuntu-mono
+    nerd-fonts.ubuntu-sans
+  ];
+
   programs = {
-    hyprland.enable = true;
     sway.enable = true;
   };
 
   services.desktopManager.plasma6.enable = true;
   services.displayManager.plasma-login-manager = {
     enable = true;
-    package = pkgsUnstable.kdePackages.plasma-login-manager;
+    package = pkgs.kdePackages.plasma-login-manager;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -113,6 +128,7 @@ in
       "netdev"
       "networkmanager"
       "docker"
+      "plugdev"
     ];
     packages = with pkgs; [
       tree
@@ -133,10 +149,9 @@ in
   environment.systemPackages = with pkgs; [
     vim
     openh264
-    betterlockscreen
-    i3blocks
-    sddm-astronaut
     vesktop
+    i3status-rust
+    swaylock-effects
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system

@@ -2,8 +2,9 @@
   description = "My NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs =
@@ -28,10 +29,12 @@
         };
 
         modules = [
+          ./modules/sops.nix
           ./modules/packages.nix
           ./modules/services.nix
           ./modules/programs.nix
           ./modules/other.nix
+          ./modules/nitrokey.nix
 
           ./modules/net.nix
           ./modules/fonts.nix
