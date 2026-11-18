@@ -11,6 +11,7 @@
       "steam"
       "steam-unwrapped"
       "nvidia-settings"
+      "nvidia-x11"
       "nvidia-persistenced"
       "teamspeak6-client"
       "nvidia-kernel-modules"
