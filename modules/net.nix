@@ -2,17 +2,18 @@
 {
   networking = {
     hostName = "${info.hostname}"; # Define your hostname.
-    nameservers = [ "127.0.0.1" ];
     extraHosts = ''
       192.168.1.1 meteor.arcadyan.com
       127.0.0.1 paradise-s1.battleye.com
       127.0.0.1 test-s1.battleye.com
       127.0.0.1 paradiseenhanced-s1.battleye.com
     '';
+
     networkmanager = {
       enable = true;
       wifi.backend = "iwd";
     };
+
     wireless.iwd = {
       enable = true;
       settings = {
@@ -41,11 +42,13 @@
   };
 
   services.dnsmasq = {
-    enable = true;
+    enable = false;
+    #resolveLocalQueries = false;
     settings = {
       conf-file = "/etc/nixos/assets/domains.txt";
       bind-interfaces = false;
       server = [ "9.9.9.9" ];
+      strict-order = true;
     };
   };
 
@@ -53,6 +56,7 @@
     wget
     traceroute
     networkmanagerapplet
+    dig
   ];
 
 }

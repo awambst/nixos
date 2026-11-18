@@ -17,10 +17,10 @@ in
   services.thermald.enable = true;
 
   imports = [
-    ./modules/steam.nix
+    #    ./modules/steam.nix
     ./hardware-configuration.nix
-    (import ./modules/strongswan.nix { inherit info; })
-    (import ./modules/wg.nix { inherit info; })
+    #    (import ./modules/strongswan.nix { inherit info; })
+    #    (import ./modules/wg.nix { inherit info; })
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -31,7 +31,7 @@ in
     inherit (config.nixpkgs) config;
   };
 
-  boot.kernelPackages = pkgsUnstable.linuxPackages_7_0;
+  boot.kernelPackages = pkgsUnstable.linuxPackages_7_3;
 
   services.sunshine = {
     enable = false;
@@ -75,15 +75,6 @@ in
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    exportConfiguration = true;
-    windowManager = {
-      i3.enable = true;
-    };
-  };
-
   fonts.packages = with pkgs; [
     font-awesome_7
     powerline-fonts
@@ -107,16 +98,12 @@ in
     nerd-fonts.ubuntu-sans
   ];
 
-  programs = {
-    sway.enable = true;
-  };
-
   services.desktopManager.plasma6.enable = true;
   services.displayManager.plasma-login-manager = {
     enable = true;
     package = pkgs.kdePackages.plasma-login-manager;
   };
-
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${info.login}" = {
     isNormalUser = true;
@@ -146,12 +133,11 @@ in
     "flakes"
   ];
 
-  environment.systemPackages = with pkgs; [
-    vim
-    openh264
-    vesktop
-    i3status-rust
-    swaylock-effects
+  environment.systemPackages = [
+    pkgs.vim
+    pkgs.openh264
+    pkgs.vesktop
+    inputs.serein.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system

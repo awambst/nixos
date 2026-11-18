@@ -10,23 +10,18 @@
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-unwrapped"
-      "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
-      "obsidian" # ;-;
       "teamspeak6-client"
+      "nvidia-kernel-modules"
     ];
   environment.systemPackages = with pkgs; [
-    #teamspeak6-client
-    #vesktop
-
     r2modman
 
     libreoffice-qt6-still
     onlyoffice-desktopeditors
 
     # notifications
-    mako
     libnotify
 
     # confirm dialog
@@ -45,7 +40,6 @@
     strongswan
     openssl
 
-    #obsidian
     #logseq
 
     fzf

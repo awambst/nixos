@@ -1,5 +1,4 @@
-{ info }:
-{ pkgs, ... }:
+{ pkgs, info, ... }:
 {
   environment.systemPackages = [
     pkgs.strongswan
@@ -10,11 +9,11 @@
 
   services.strongswan-swanctl.swanctl = {
     authorities = {
-      banquise1.file = "/home/${info.login}/.secrets/strongswan/cacerts/BanquiseRootCA.cacert.pem";
-      banquise2.file = "/home/${info.login}/.secrets/strongswan/cacerts/BanquiseMachineIssuingCA.cacert.pem";
-      banquise3.file = "/home/${info.login}/.secrets/strongswan/cacerts/BanquiseMachineSubCA.cacert.pem";
-      banquise4.file = "/home/${info.login}/.secrets/strongswan/cacerts/BanquiseUserIssuingCA.cacert.pem";
-      banquise5.file = "/home/${info.login}/.secrets/strongswan/cacerts/BanquiseUserSubCA.cacert.pem";
+      banquise1.file = "/etc/swanctl/x509ca/BanquiseRootCA.cacert.pem";
+      banquise2.file = "/etc/swanctl/x509ca/BanquiseMachineIssuingCA.cacert.pem";
+      banquise3.file = "/etc/swanctl/x509ca/BanquiseMachineSubCA.cacert.pem";
+      banquise4.file = "/etc/swanctl/x509ca/BanquiseUserIssuingCA.cacert.pem";
+      banquise5.file = "/etc/swanctl/x509ca/BanquiseUserSubCA.cacert.pem";
     };
 
     connections = {

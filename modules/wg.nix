@@ -1,5 +1,4 @@
-{ info }:
-{ ... }:
+{ info, ... }:
 {
   networking.wireguard.enable = info.wg-admin-homelab;
   networking.wireguard.interfaces = {

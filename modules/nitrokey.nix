@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, info, ... }:
 {
   hardware.nitrokey.enable = true;
 
@@ -20,7 +20,7 @@
     description = "Lock session on Nitrokey removal";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/systemctl --user -M 'arthur.wambst@' start nitrokey-lock.service";
+      ExecStart = "${pkgs.systemd}/bin/systemctl --user -M '${info.login}@' start nitrokey-lock.service";
     };
   };
 
@@ -29,16 +29,7 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "nitrokey-lock" ''
-        if [ "$XDG_CURRENT_DESKTOP" = "sway" ]; then
-          echo "sway!"
-          /run/current-system/sw/bin/swaylock
-        elif echo "$XDG_CURRENT_DESKTOP" | grep -qi "kde"; then
-          echo "kde!"
-          ${pkgs.systemd}/bin/loginctl lock-session
-        else
-          echo "else"
-          ${pkgs.systemd}/bin/loginctl lock-session
-        fi
+        ${pkgs.systemd}/bin/loginctl lock-session
       '';
     };
   };
@@ -56,7 +47,7 @@
       enable = true;
       control = "sufficient"; # key alone is enough, or use "required" for MFA
       settings = {
-        authfile = "/home/arthur.wambst/.config/nitrokey/u2f_keys";
+        authfile = "/home/${info.hostname}/.config/nitrokey/u2f_keys";
         cue = true; # prints "please touch your key"
         userpresence = 0;
         userverification = 0;
